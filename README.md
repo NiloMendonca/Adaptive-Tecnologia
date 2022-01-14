@@ -1,5 +1,5 @@
 # Rodando o projeto
-<small><b>*Para a execução de algumas bibliotecas é necessário rodar o projeto em uma versão do NodeJs >= v12.22.7</b></small>
+<small><b>*Para a execução de algumas bibliotecas é necessário rodar o projeto em uma versão do NodeJs >= v14</b></small>
 ## Front-end
 Entre no diretório do 'frontend' e rode os comandos:
 ### Setup do projeto
@@ -11,11 +11,6 @@ npm install
 ```
 npm run serve
 ```
-### Testes
-```
-npm test
-```
-
 A aplicação ira rodar no endereço 'http://localhost:8080'
 
 
