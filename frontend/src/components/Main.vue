@@ -2,21 +2,21 @@
   <section>
     <v-container class="my-5">
       <v-layout row wrap justify-center>
-        <v-flex xs12 md3 class="center">
+        <v-flex xs12 md2 class="center">
           <Profile @login="getUser()" @logout="logout()"/>
         </v-flex>
 
-        <v-flex xs12 md9 class="center">
+        <v-flex xs12 md12 class="center">
           <ShortUrl @getAllUrls="getAllUrls()"/>
-          
-          <div class="left">
+
+          <v-flex xs12 md3 class="left">
             <pfe-accordion v-if="token != ''">
               <pfe-accordion-header>
                 <h3>Minhas URLs</h3>
               </pfe-accordion-header>
               <pfe-accordion-panel>
                 <span v-for="(item, i) of listUrls" :key="item.id" v-bind:value="i">
-                  <Card />
+                  <Card v-if="item.login == email" :type="'owner'" @deleteUrl="deleteUrl(item)" @getUrl="getUrl(item.code)" :code="item.code" :url="item.url" :id="item.id" :hits="item.hits" class="card"/>
                 </span>
               </pfe-accordion-panel>
             </pfe-accordion>
@@ -27,11 +27,11 @@
               </pfe-accordion-header>
               <pfe-accordion-panel>
                 <span v-for="(item, i) of listUrls" :key="item.id" v-bind:value="i">
-                  <Card />
+                  <Card :code="item.code" @getUrl="getUrl(item.code)" :type="'other'" :url="item.url" :id="item.id" :hits="item.hits" class="card" />
                 </span>
               </pfe-accordion-panel>
             </pfe-accordion>
-          </div>
+          </v-flex>
         </v-flex>
       </v-layout>
     </v-container>
@@ -145,5 +145,10 @@ body {
     }
     .left {
       text-align: left !important;
+    }
+    .card {
+      display: inline-block;
+      position: relative;
+      margin: 3px;
     }
 </style>

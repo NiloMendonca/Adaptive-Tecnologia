@@ -7,9 +7,7 @@
     </pfe-button>
     <h3 class="outputUrl outputUrlValid" @click="getUrl(outputUrl)" v-if="outputUrl">http://localhost:3000/{{outputUrl}}</h3>
     <h3 class="outputUrl outputUrlInvalid" v-if="!outputUrl">http://localhost:3000/</h3>
-    <pfe-toast id="shorturl-pfe-toast">
-      <p>URL encurtada com sucesso!</p>
-    </pfe-toast>
+    <pf-alert v-if="showToast" type="success" persistent="true">URL encurtada com sucesso!</pf-alert>
   </section>
 </template>
 
@@ -17,27 +15,28 @@
 import api from "../http/api";
 
 import "@patternfly/pfe-button";
-import "@patternfly/pfe-toast";
+
+import "@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js";
+import "patternfly/dist/css/patternfly.css";
+import "patternfly/dist/css/patternfly-additions.css";
+import "patternfly-webcomponents/dist/css/patternfly-webcomponents.css";
+import "patternfly-webcomponents/dist/js/pf-alert.js";
 
 export default {
   name: "ShortUrl",
   components: {
-    // Tooltip
   },
   data() {
     return {
       inputUrl: 'https://',
       outputUrl: '',
-      toast: '',
+      showToast: false,
     }
-  },
-  mounted(){
-    this.toast = document.querySelector("#shorturl-pfe-toast");
   },
   methods: {
     callToast(){
-      this.toast.open();
-      setTimeout(() => this.toast.close(), 3500);
+      this.showToast = true;
+      setTimeout(() => this.showToast = false, 4500);
     },
     getUrl(code) {
       const that = this;
@@ -81,6 +80,13 @@ body {
   -moz-text-size-adjust: none;
   color: #293141;
 }
+        pf-alert {
+          position: fixed;
+          top: 10px;
+          left: 50%;
+          right: 10px;
+          z-index: 100;
+        }
         section {
           margin: 10px;
         }

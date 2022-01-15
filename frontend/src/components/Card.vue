@@ -1,29 +1,21 @@
 <template>
   <section>
     <pfe-card color="darker" border>
-      <img
-        alt="From https://picsum.photos/"
-        overflow="left right top"
-        src="https://picsum.photos/id/1019/300/200">
+      <pfe-badge :number="hits">{{hits}}</pfe-badge>
       <p>
-        This is the light pfe-card and
-        <a href="#">a link</a>.
-        <pfe-badge aria-label="2 unread messages" number="6">6</pfe-badge>
-      </p>
-      
-      <p>
-                      Leverage agile frameworks to provide a robust synopsis for high
-                      level overviews. Iterative approaches to corporate strategy
-                      foster collaborative thinking to further the overall value
-                      proposition.
-      </p>
-      <p>
-                      Organically grow the holistic world view of disruptive
-                      innovation via workplace diversity and empowerment.
+        {{url}}
       </p>
       <pfe-cta>
+        <p @click="getUrl()">http://localhost:3000/{{code}}</p>
+      </pfe-cta>
+
+      <br>
+
+      <pfe-cta v-if="type == 'owner'">
         <template slot:pfe-card--footer>
-          <a href="#">Learn more</a>
+          <pfe-button variant="danger">
+            <button class="btnDel" @click="del()">Deletar</button>
+          </pfe-button>
         </template>
       </pfe-cta>
     </pfe-card>
@@ -32,24 +24,32 @@
 
 <script>
 import "@patternfly/pfe-card";
+import "@patternfly/pfe-badge";
+import "@patternfly/pfe-cta";
+import "@patternfly/pfe-button";
 
 export default {
   name: "Card",
-  data() {
-    return {
-      email: '',
-    }
-  },
-  mounted(){
+  props: {
+    code: String,
+    url: String,
+    id: Number,
+    hits: Number,
+    type: String,
   },
   methods: {
-    logout(){
-      this.token = '';
-      this.email = '';
+    del(){
+      this.$emit('deleteUrl');
+    },
+    getUrl(){
+      this.$emit('getUrl');
     }
   },
 }
 </script>
 
 <style scoped>
+  pfe-card {
+    padding: 10px;
+  }
 </style>

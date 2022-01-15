@@ -11,9 +11,7 @@
         <button @click="signup()">Cadastro</button>
       </pfe-button>
 
-      <pfe-toast id="profile-pfe-toast">
-        <p>Erro na requisição!</p>
-      </pfe-toast>
+      <pf-alert v-if="showToast" type="warning" persistent="true">Erro na requisição!</pf-alert>
     </span>
     <span v-if="token">
       <p class="center email">{{email}}</p>
@@ -28,7 +26,12 @@
 import api from "../http/api";
 
 import "@patternfly/pfe-avatar";
-import "@patternfly/pfe-toast";
+
+import "@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js";
+import "patternfly/dist/css/patternfly.css";
+import "patternfly/dist/css/patternfly-additions.css";
+import "patternfly-webcomponents/dist/css/patternfly-webcomponents.css";
+import "patternfly-webcomponents/dist/js/pf-alert.js";
 
 export default {
   name: "Profile",
@@ -37,18 +40,16 @@ export default {
       email: '',
       password: '',
       token: '',
-      toast: '',
-
+      showToast: false,
     }
   },
   mounted(){
     this.getUser();
-    this.toast = document.querySelector("#profile-pfe-toast");
   },
   methods: {
     callToast(){
-      this.toast.open();
-      setTimeout(() => this.toast.close(), 3500);
+      this.showToast = true;
+      setTimeout(() => this.showToast = false, 4500);
     },
     logout(){
       localStorage.setItem('accessToken', '');
@@ -135,6 +136,13 @@ body {
     .center {
       text-align: center !important;
     }
+        pf-alert {
+          position: fixed;
+          top: 10px;
+          left: 50%;
+          right: 10px;
+          z-index: 100;
+        }
         section {
           min-width: 230px;
           margin: 10px;
