@@ -10,7 +10,7 @@ const Flags = database.define ('flags', {
 	amountDigits: {
 		type: Sequelize.INTEGER.UNSIGNED,
 		allowNull: false,
-		defaultValue: 1,
+		defaultValue: 4,
 	}
 })
 

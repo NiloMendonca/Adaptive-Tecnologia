@@ -1,6 +1,5 @@
 <template>
   <section>
-    <pfe-avatar name="Eleanore Stillwagon"></pfe-avatar>
     <span v-if="!token">
       <input class="inputUser inputEmail" type="text" v-model="email" placeholder="Email"/><br/>
       <input class="inputUser inputPassword" type="password" v-model="password" placeholder="Senha"/><br/>
@@ -11,9 +10,10 @@
         <button @click="signup()">Cadastro</button>
       </pfe-button>
 
-      <pf-alert v-if="showToast" type="warning" persistent="true">Erro na requisição!</pf-alert>
+      <pf-alert v-if="showToast" type="warning">Erro na requisição!</pf-alert>
     </span>
     <span v-if="token">
+      <pfe-avatar name="Eleanore Stillwagon"></pfe-avatar>
       <p class="center email">{{email}}</p>
       <pfe-button variant="tertiary">
         <button @click="logout()">Sair</button>

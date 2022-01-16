@@ -23,7 +23,7 @@ async function generateCode(amountDigits, collision){
     let flags = await Flags.findOne({where: {id: 0}});
     if(!flags){
       const id = 0;
-      amountDigits = 1;
+      amountDigits = 4;
       await Flags.create({
         id,
         amountDigits

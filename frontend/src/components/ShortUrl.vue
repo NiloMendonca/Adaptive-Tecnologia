@@ -7,7 +7,7 @@
     </pfe-button>
     <h3 class="outputUrl outputUrlValid" @click="getUrl(outputUrl)" v-if="outputUrl">http://localhost:3000/{{outputUrl}}</h3>
     <h3 class="outputUrl outputUrlInvalid" v-if="!outputUrl">http://localhost:3000/</h3>
-    <pf-alert v-if="showToast" type="success" persistent="true">URL encurtada com sucesso!</pf-alert>
+    <pf-alert v-if="showToast" type="success">URL encurtada com sucesso!</pf-alert>
   </section>
 </template>
 
